@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aleksandra i Bartłomiej - Logowanie</title>
-    <!-- Czcionki Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="databaseScript.js" defer></script>
@@ -14,8 +13,14 @@
 
     <div id="login-container" class="login-wrapper">
         
+        <!-- Górna dekoracja -->
         <div class="flower-decor top-flowers">
-            <img src="img/kwiatki-gora.png" alt="dekoracja góra">
+            <picture>
+                <!-- Na telefon -->
+                <source media="(max-width: 768px)" srcset="img/kwiatki-gora.png">
+                <!-- Na komputer -->
+                <img src="img/kwiatki-calosc-gora.png" alt="dekoracja góra">
+            </picture>
         </div>
 
         <div class="login-content">
@@ -52,9 +57,14 @@
             </div>
         </div>
 
-        <!-- Dolna dekoracja (rozciągnięta na całą szerokość ekranu) -->
+        <!-- Dolna dekoracja -->
         <div class="flower-decor bottom-flowers">
-            <img src="img/kwiatki-dol.png" alt="dekoracja dół">
+            <picture>
+                <!-- Na telefon -->
+                <source media="(max-width: 768px)" srcset="img/kwiatki-dol.png">
+                <!-- Na komputer -->
+                <img src="img/kwiatki-calosc-dol.png" alt="dekoracja dół">
+            </picture>
         </div>
     </div>
 
