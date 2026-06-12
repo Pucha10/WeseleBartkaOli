@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aleksandra i Bartłomiej - Logowanie</title>
+    <!-- Czcionki Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="databaseScript.js" defer></script>
     <script src="app.js" defer></script>
 </head>
-<body>
+<body class="login-page">
 
     <div id="login-container" class="login-wrapper">
         
-        <!-- Górna dekoracja -->
         <div class="flower-decor top-flowers">
             <picture>
-                <!-- Na telefon -->
                 <source media="(max-width: 768px)" srcset="img/kwiatki-gora.png">
-                <!-- Na komputer -->
                 <img src="img/kwiatki-calosc-gora.png" alt="dekoracja góra">
             </picture>
         </div>
@@ -57,34 +55,12 @@
             </div>
         </div>
 
-        <!-- Dolna dekoracja -->
         <div class="flower-decor bottom-flowers">
             <picture>
-                <!-- Na telefon -->
                 <source media="(max-width: 768px)" srcset="img/kwiatki-dol.png">
-                <!-- Na komputer -->
                 <img src="img/kwiatki-calosc-dol.png" alt="dekoracja dół">
             </picture>
         </div>
-    </div>
-
-    <!-- Główna zawartość strony po zalogowaniu -->
-    <div id="main-container" class="main-site-wrapper hidden">
-        <header class="main-header">
-            <div class="logo-serif">A & B</div>
-            <nav class="nav-links">
-                <a href="#details">Szczegóły</a>
-                <a href="#gallery">Zdjęcia</a>
-                <button id="logout-btn" class="logout-btn-style">Wyloguj</button>
-            </nav>
-        </header>
-
-        <main class="content-box">
-            <section class="welcome-section">
-                <h2 id="welcome-message" class="calligraphy-welcome">Witaj!</h2>
-                <p id="admin-badge" class="badge hidden">Panel Administratora</p>
-            </section>
-        </main>
     </div>
 
 </body>
