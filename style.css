@@ -6,6 +6,7 @@
     
     --serif-font: 'Playfair Display', serif;
     --cursive-font: 'Dancing Script', cursive;
+    --parisienne-font: 'Parisienne', cursive;
     --sans-font: 'Montserrat', sans-serif;
 }
 
@@ -108,7 +109,7 @@ body {
 }
 
 .ampersand {
-    font-family: var(--serif-font);
+    font-family: var(--parisienne-font);
     font-style: italic;
     font-weight: 400;
     font-size: 2.4rem; 
@@ -283,6 +284,222 @@ body {
     font-size: 0.7rem;
     font-weight: 600;
     margin-top: 10px;
+}
+
+
+body.home-page {
+    background-image: url('img/background-img.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Tło pozostaje nieruchome podczas przewijania */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main-site-wrapper {
+    width: 100%;
+    max-width: 450px; 
+    padding: 60px 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Imiona na stronie głównej */
+.home-header {
+    margin-bottom: 5px;
+}
+
+.serif-name-home {
+    font-family: "var(--serif-font)";
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    margin: 5px 0;
+    color: var(--text-dark);
+}
+
+.ampersand-home {
+    font-family: var(--serif-font);
+    font-style: italic;
+    font-size: 2.6rem;
+    color: var(--text-dark);
+    margin: -10px 0;
+}
+
+/* Separatory ozdobne (linie z ikonami) */
+.ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 280px;
+    margin: 10px 0;
+}
+
+.divider-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #abbcb2; 
+    opacity: 0.6;
+}
+
+.divider-icon {
+    margin: 0 15px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.wedding-claim {
+    font-family: var(--sans-font);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 5px 0 25px 0;
+}
+
+/* Karta licznika odliczającego */
+.countdown-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.countdown-title {
+    font-family: var(--sans-font);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.countdown-card {
+    background: rgba(255, 255, 255, 0.85); /* Efekt półprzezroczystego szkła */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(188, 212, 230, 0.2);
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22%;
+}
+
+.time-num {
+    font-family: var(--serif-font);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+.time-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #555555;
+    margin-top: 4px;
+}
+
+.card-separator {
+    width: 1px;
+    height: 30px;
+    background-color: #dddddd;
+    opacity: 0.7;
+}
+
+.wedding-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.menu-item {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(188, 212, 230, 0.3);
+}
+
+.menu-icon {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-text {
+    font-family: var(--sans-font);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-align: left;
+    flex-grow: 1; 
+}
+
+.menu-arrow {
+    font-size: 0.75rem;
+    color: #888888;
+}
+
+/* Stopka z cytatem */
+.home-footer {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quote-text {
+    font-family: var(--cursive-font);
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin: 0 0 25px 0;
+}
+
+.logout-btn-style-home {
+    background: none;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 8px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--sans-font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--text-dark);
+    transition: all 0.2s;
+    margin-top: 15px;
+}
+
+.logout-btn-style-home:hover {
+    background-color: var(--text-dark);
+    color: #ffffff;
 }
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aleksandra i Bartłomiej - Strona Główna</title>
-    <!-- Czcionki Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="databaseScript.js" defer></script>
@@ -13,22 +13,79 @@
 <body class="home-page">
 
     <div id="main-container" class="main-site-wrapper">
-        <header class="main-header">
-            <div class="logo-serif">A & B</div>
-            <nav class="nav-links">
-                <a href="#details">Szczegóły</a>
-                <a href="#gallery">Zdjęcia</a>
-                <button id="logout-btn" class="logout-btn-style">Wyloguj</button>
-            </nav>
-        </header>
+        
+         <div class="names-header">
+                <h1 class="serif-name">ALEKSANDRA <span class="ampersand">&</span> BARTŁOMIEJ</h1>
+            </div>
 
-        <main class="content-box">
-            <section class="welcome-section">
-                <h2 id="welcome-message" class="calligraphy-welcome">Witaj!</h2>
-                <p id="admin-badge" class="badge hidden">Panel Administratora</p>
-            </section>
-            
-        </main>
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/flower.png" alt="dekoracja góra"></span>
+            <span class="divider-line"></span>
+        </div>
+
+
+        <section class="countdown-section">
+            <h2 class="countdown-title">DO ŚLUBU POZOSTAŁO</h2>
+            <div class="countdown-card">
+                <div class="time-box">
+                    <span id="days" class="time-num">00</span>
+                    <span class="time-label">DNI</span>
+                </div>
+                <div class="card-separator"></div>
+                <div class="time-box">
+                    <span id="hours" class="time-num">00</span>
+                    <span class="time-label">GODZIN</span>
+                </div>
+                <div class="card-separator"></div>
+                <div class="time-box">
+                    <span id="minutes" class="time-num">00</span>
+                    <span class="time-label">MINUT</span>
+                </div>
+                <div class="card-separator"></div>
+                <div class="time-box">
+                    <span id="seconds" class="time-num">00</span>
+                    <span class="time-label">SEKUND</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="wedding-menu">
+
+            <a href="#location" class="menu-item">
+                <span class="menu-icon">📍</span>
+                <span class="menu-text">LOKALIZACJA</span>
+                <span class="menu-arrow">❯</span>
+            </a>
+            <a href="#rsvp" class="menu-item">
+                <span class="menu-icon">👥</span>
+                <span class="menu-text">POTWIERDZENIE OBECNOŚCI</span>
+                <span class="menu-arrow">❯</span>
+            </a>
+            <a href="#gallery" class="menu-item">
+                <span class="menu-icon">📷</span>
+                <span class="menu-text">GALERIA</span>
+                <span class="menu-arrow">❯</span>
+            </a>
+            <a href="#contact" class="menu-item">
+                <span class="menu-icon">✉️</span>
+                <span class="menu-text">KONTAKT</span>
+                <span class="menu-arrow">❯</span>
+            </a>
+        </nav>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/heart-with-background.png" alt="serce"></span></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <footer class="home-footer">
+            <p class="quote-text">"Najlepsze dopiero przed nami"</p>
+            <p id="admin-badge" class="badge hidden">Panel Administratora</p>
+            <button id="logout-btn" class="logout-btn-style-home">Wyloguj</button>
+        </footer>
+
     </div>
 
 </body>
