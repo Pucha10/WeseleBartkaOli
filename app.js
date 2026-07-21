@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const name = document.getElementById("firstname").value.trim();
             const surname = document.getElementById("lastname").value.trim();
-            const pin = document.getElementById("pin").value.trim();
+            const inputPin = document.getElementById("pin").value.trim();
 
             try {
                 const guest = await findGuest(name, surname);
@@ -26,9 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                const pinRecord = await getGuestPin(guest.id);
-
-                if (pinRecord && pinRecord.pin === pin) {
+                if (guest.pin && guest.pin === inputPin) {
                     localStorage.setItem(
                         "wedding_guest",
                         JSON.stringify(guest),
@@ -39,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Niepoprawny PIN. Spróbuj ponownie.";
                 }
             } catch (error) {
-                console.error("Błąd podczas logowania:", error);
+                console.error("Błąd logowania:", error);
                 loginError.textContent = "Wystąpił błąd połączenia z serwerem.";
             }
         });

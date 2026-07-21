@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleksandra i Bartłomiej - Panel Administratora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="databaseScript.js" defer></script>
+    <script src="admin.js" defer></script>
+</head>
+<body class="home-page">
+
+    <div id="main-container" class="main-site-wrapper">
+        
+        <div class="names-header">
+            <h1 class="serif-name">ALEKSANDRA <span class="ampersand">&</span> BARTŁOMIEJ</h1>
+        </div>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/flower.png" alt="dekoracja góra"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <section class="admin-section">
+            <h2 class="section-title" style="margin-bottom: 25px;">Statystyki</h2>
+
+            <div class="admin-stats-card">
+                <div class="stats-row">
+                    <span class="stats-label">Wypełniło formularz:</span>
+                    <span class="stats-value" id="stat-filled">...</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Nie wypełniło formularza:</span>
+                    <span class="stats-value" id="stat-pending">...</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Będzie na ślubie i weselu:</span>
+                    <span class="stats-value" id="stat-both">...</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Tylko na ślubie:</span>
+                    <span class="stats-value" id="stat-church">...</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Nie będzie:</span>
+                    <span class="stats-value" id="stat-none">...</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Osoby potrzebujące noclegu:</span>
+                    <span class="stats-value" id="stat-acc-people">...</span>
+                </div>
+                <div class="stats-row">
+                    <span class="stats-label">Potrzebne noclegi (pokoje):</span>
+                    <span class="stats-value" id="stat-accommodation">...</span>
+                </div>
+                
+                <div class="stats-row highlight">
+                    <span class="stats-label">L. osób na weselu:</span>
+                    <span class="stats-value" id="stat-confirmed-total">...</span>
+                </div>
+            </div>
+
+            <div class="button-wrapper" style="justify-content: center;">
+                <button id="exact-data-btn" class="pill-button" style="width: 100%; max-width: 340px;">Dokładne dane</button>
+            </div>
+        </section>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/heart-with-background.png" alt="serce"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="back-btn-wrapper">
+            <a href="home.html" class="pill-button-outline">Wróć</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

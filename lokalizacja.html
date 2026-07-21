@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleksandra i Bartłomiej - Lokalizacja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('wedding_guest')) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</head>
+<body class="home-page">
+
+    <div id="main-container" class="main-site-wrapper">
+        
+        <div class="names-header">
+            <h1 class="serif-name">ALEKSANDRA <span class="ampersand">&</span> BARTŁOMIEJ</h1>
+        </div>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/flower.png" alt="dekoracja góra"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <section class="location-section">
+            <h2 class="section-title">Ślub</h2>
+            
+            <div class="datetime-row">
+                <div class="info-item">
+                    <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>14.08.2027</span>
+                </div>
+                <div class="info-item">
+                    <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>16:00</span>
+                </div>
+            </div>
+
+            <div class="address-row">
+                <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M10 3.5h4M12 8l-8 6v8h16v-8z"></path><path d="M12 15v7"></path><path d="M9 22v-4a3 3 0 0 1 6 0v4"></path></svg>
+                <div class="address-text">
+                    <strong>Kościół MB Różańcowej w Bielisze</strong><br>
+                    ul. Ogrodowa 1, Bielicha
+                </div>
+            </div>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Ko%C5%9Bci%C5%B3%C5%82+MB+R%C3%B3%C5%BCa%C5%84cowej+w+Bielisze+ul+Ogrodowa+1+Bielicha" target="_blank" class="map-link">
+                <img src="img/church.png" alt="Mapa - Kościół" class="map-img">
+            </a>
+        </section>
+
+        <section class="location-section">
+            <h2 class="section-title">Wesele</h2>
+
+            <div class="address-row">
+                <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <div class="address-text">
+                    <strong>Dom Weselny "u Kowala"</strong><br>
+                    ul. Owalna 12a, Radom
+                </div>
+            </div>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Dom+Weselny+u+Kowala+ul+Owalna+12a+Radom" target="_blank" class="map-link">
+                <img src="img/sala.png" alt="Mapa - Dom Weselny" class="map-img">
+            </a>
+        </section>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/heart-with-background.png" alt="serce"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="transport-info">
+            <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M4 16v2h16v-2"></path><circle cx="6.5" cy="19.5" r="1.5"></circle><circle cx="17.5" cy="19.5" r="1.5"></circle><path d="M19 8H5"></path><path d="M9 4v4"></path><path d="M15 4v4"></path></svg>
+            <p class="transport-text">
+                Pod kościołem będzie czekał na Was autokar, który przewiezie chętne osoby na salę weselną.
+            </p>
+        </div>
+
+        <div class="back-btn-wrapper">
+            <a href="home.html" class="pill-button-outline">Wróć</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Obsługa wylogowania
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
             localStorage.removeItem("wedding_guest");
@@ -31,8 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. FUNKCJONALNY LICZNIK ODLICZAJĄCY
-    // Ustawienie daty ślubu: 14 sierpnia 2027, 16:00:00
     const weddingDate = new Date("August 14, 2027 16:00:00").getTime();
 
     const daysEl = document.getElementById("days");
@@ -60,14 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-        // Wyświetlenie z dodaniem zera na początku dla liczb jednocyfrowych
         if (daysEl) daysEl.textContent = String(days).padStart(2, "0");
         if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
         if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, "0");
         if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, "0");
     }
 
-    // Aktualizacja co 1 sekundę
     setInterval(updateCountdown, 1000);
-    updateCountdown(); // Wywołanie natychmiastowe na starcie
+    updateCountdown();
 });

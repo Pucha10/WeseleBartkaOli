@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleksandra i Bartłomiej - Potwierdzenie Obecności</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="databaseScript.js" defer></script>
+    <script src="rsvp.js" defer></script>
+</head>
+<body class="home-page">
+
+    <div id="main-container" class="main-site-wrapper">
+        
+        <div class="names-header">
+            <h1 class="serif-name">ALEKSANDRA <span class="ampersand">&</span> BARTŁOMIEJ</h1>
+        </div>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/flower.png" alt="dekoracja góra"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <section class="rsvp-section">
+            <p class="rsvp-greeting">Prosimy o potwierdzenie obecności do dnia 01.07.2027.</p>
+
+            <form id="rsvp-form" class="classic-form">
+                
+                <div id="family-members-list"></div>
+
+                <div class="button-wrapper" style="justify-content: center; margin-top: 5px;">
+                    <button type="submit" id="save-rsvp-btn" class="pill-button-outline" style="width: 80%;">Zapisz</button>
+                </div>
+                
+                <p id="rsvp-status" class="rsvp-status-message"></p>
+            </form>
+        </section>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/heart-with-background.png" alt="serce"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="back-btn-wrapper">
+            <a href="home.html" class="pill-button-outline">Wróć</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

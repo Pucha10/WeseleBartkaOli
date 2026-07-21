@@ -27,10 +27,10 @@ async function findGuest(name, surname) {
     }
 }
 
-async function getGuestPin(guestId) {
+async function getFamilyGuests(pin) {
     try {
         const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/pin_plain_text?id=eq.${guestId}`,
+            `${SUPABASE_URL}/rest/v1/guest?pin=eq.${encodeURIComponent(pin)}&order=id.asc`,
             {
                 method: "GET",
                 headers: {
@@ -42,48 +42,80 @@ async function getGuestPin(guestId) {
         );
 
         if (!response.ok)
-            throw new Error(`Błąd pobierania PIN-u: ${response.statusText}`);
+            throw new Error(`Błąd pobierania rodziny: ${response.statusText}`);
 
-        const data = await response.json();
-        return data[0] || null;
+        return await response.json();
     } catch (error) {
-        console.error("Błąd podczas pobierania PIN-u:", error);
-        return null;
+        console.error("Błąd podczas pobierania członków rodziny:", error);
+        return [];
     }
 }
 
-async function uploadWeddingPhoto(fileInput) {
-    if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const fileExt = file.name.split(".").pop();
-        const fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}.${fileExt}`;
-        const filePath = `${fileName}`;
+async function updateSingleGuestRSVP(
+    guestId,
+    churchPresent,
+    weddingPresent,
+    additionalPersonPresent = null,
+    needAccommodation = null,
+) {
+    try {
+        const payload = {
+            churchPresent: churchPresent,
+            weddingPresent: weddingPresent,
+        };
 
-        try {
-            const uploadResponse = await fetch(
-                `${SUPABASE_URL}/storage/v1/object/WeddingIMG/${filePath}`,
-                {
-                    method: "POST",
-                    headers: {
-                        apikey: SUPABASE_KEY,
-                        Authorization: `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": file.type,
-                    },
-                    body: file,
+        if (additionalPersonPresent !== null) {
+            payload.additionalPersonPresent = additionalPersonPresent;
+        }
+
+        if (needAccommodation !== null) {
+            payload.needAccommodation = needAccommodation;
+        } else {
+            payload.needAccommodation = null;
+        }
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/guest?id=eq.${guestId}`,
+            {
+                method: "PATCH",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json",
                 },
+                body: JSON.stringify(payload),
+            },
+        );
+
+        return response.ok;
+    } catch (error) {
+        console.error(`Błąd zapisu gościa o ID ${guestId}:`, error);
+        return false;
+    }
+}
+
+async function getAllGuests() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/guest?order=surname.asc,name.asc`,
+            {
+                method: "GET",
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json",
+                },
+            },
+        );
+
+        if (!response.ok)
+            throw new Error(
+                `Błąd pobierania listy gości: ${response.statusText}`,
             );
 
-            if (uploadResponse.ok) {
-                const uploadedImageUrl = `${SUPABASE_URL}/storage/v1/object/public/WeddingIMG/${filePath}`;
-                return uploadedImageUrl;
-            } else {
-                console.error("Błąd wgrywania zdjęcia do serwera");
-                return null;
-            }
-        } catch (err) {
-            console.error("Błąd Storage:", err);
-            return null;
-        }
+        return await response.json();
+    } catch (error) {
+        console.error("Błąd pobierania listy gości:", error);
+        return [];
     }
-    return null;
 }

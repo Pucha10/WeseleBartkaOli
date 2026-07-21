@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleksandra i Bartłomiej - Galeria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('wedding_guest')) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</head>
+<body class="home-page">
+
+    <div id="main-container" class="main-site-wrapper">
+        <div class="names-header">
+            <h1 class="serif-name">ALEKSANDRA <span class="ampersand">&</span> BARTŁOMIEJ</h1>
+        </div>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/flower.png" alt="dekoracja góra"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Galeria</h2>
+            <p class="gallery-description">
+                Podziel się z nami swoimi wspomnieniami!<br>
+                Wstaw swoje zdjęcia i filmiki z naszego ślubu i wesela na dysk Google, abyśmy wszyscy mogli je obejrzeć i zachować te piękne chwile na dłużej.
+            </p>
+
+
+            <a href="https://drive.google.com/drive/folders/1JShaAoS2pu_DQyGZAMZIqRkicmqrg7sj?usp=sharing" target="_blank" class="drive-link-wrapper">
+                <img src="img/google-drive-img.png" alt="Dodaj zdjęcia i filmiki na Dysk Google" class="gallery-upload-img">
+            </a>
+        </section>
+
+        <div class="ornament-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon"><img src="img/heart-with-background.png" alt="serce"></span>
+            <span class="divider-line"></span>
+        </div>
+
+        <footer class="home-footer">
+            <p class="quote-text" style="font-size: 1.6rem;">Dziękujemy, że jesteście z nami!</p>
+            <div class="back-btn-wrapper">
+                <a href="home.html" class="pill-button-outline">Wróć</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
