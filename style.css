@@ -1070,3 +1070,117 @@ body.home-page {
     color: var(--text-dark);
     font-size: 1.35rem; 
 }
+
+/* --- STYLIZACJA KART GOŚCI DO EDYCJI W PANELU ADMINA --- */
+
+#guests-list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.guest-admin-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    text-align: left;
+    width: 100%;
+}
+
+.guest-admin-name {
+    font-family: var(--serif-font); /* Playfair Display */
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    padding-bottom: 6px;
+}
+
+/* Układ opcji edycji w postaci dwukolumnowej siatki */
+.guest-admin-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 15px;
+    margin-bottom: 15px;
+}
+
+.admin-check-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.admin-check-label input[type="checkbox"] {
+    display: none; /* Ukrywamy natywne checkboxy */
+}
+
+/* Własne zaokrąglone kwadraty */
+.admin-custom-check {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #121212;
+    border-radius: 4px;
+    margin-right: 8px;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    background-color: #ffffff;
+}
+
+.admin-check-label input[type="checkbox"]:checked + .admin-custom-check {
+    background-color: var(--accent-blue); /* Twój błękit BED3FB */
+}
+
+.admin-check-label input[type="checkbox"]:checked + .admin-custom-check::after {
+    content: '✓';
+    color: #121212;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.admin-label-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Kontener przycisku zapisu i statusu */
+.guest-admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-save-guest-btn {
+    background-color: var(--accent-blue);
+    border: 1.5px solid #121212;
+    border-radius: 50px;
+    padding: 6px 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: var(--sans-font);
+    transition: all 0.2s ease;
+}
+
+.admin-save-guest-btn:hover {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.save-status {
+    font-size: 0.95rem;
+    font-weight: bold;
+}

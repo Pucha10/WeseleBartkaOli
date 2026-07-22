@@ -25,9 +25,9 @@
         </div>
 
         <section class="admin-section">
-            <h2 class="section-title" style="margin-bottom: 25px;">Statystyki</h2>
+            <h2 class="section-title" id="admin-view-title" style="margin-bottom: 25px;">Statystyki</h2>
 
-            <div class="admin-stats-card">
+            <div class="admin-stats-card" id="stats-view">
                 <div class="stats-row">
                     <span class="stats-label">Wypełniło formularz:</span>
                     <span class="stats-value" id="stat-filled">...</span>
@@ -53,7 +53,7 @@
                     <span class="stats-value" id="stat-acc-people">...</span>
                 </div>
                 <div class="stats-row">
-                    <span class="stats-label">Potrzebne noclegi (pokoje):</span>
+                    <span class="stats-label">Potrzebne pokoje:</span>
                     <span class="stats-value" id="stat-accommodation">...</span>
                 </div>
                 
@@ -63,7 +63,11 @@
                 </div>
             </div>
 
-            <div class="button-wrapper" style="justify-content: center;">
+            <div id="guests-list-view" class="hidden" style="width: 100%; max-width: 360px;">
+                <div id="guests-cards-container"></div>
+            </div>
+
+            <div class="button-wrapper" style="justify-content: center; margin-top: 15px;">
                 <button id="exact-data-btn" class="pill-button" style="width: 100%; max-width: 340px;">Dokładne dane</button>
             </div>
         </section>
