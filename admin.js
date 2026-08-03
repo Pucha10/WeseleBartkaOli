@@ -1,36 +1,38 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const savedUser = localStorage.getItem("wedding_guest");
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Ochrona dostępu: sprawdzenie uprawnień administratora
+    const savedUser = localStorage.getItem('wedding_guest');
     if (!savedUser) {
-        window.location.href = "index.html";
+        window.location.href = 'index.html';
         return;
     }
 
     const user = JSON.parse(savedUser);
     if (!user.admin) {
-        window.location.href = "home.html";
+        window.location.href = 'home.html';
         return;
     }
 
-    const adminViewTitle = document.getElementById("admin-view-title");
-    const statsView = document.getElementById("stats-view");
-    const guestsListView = document.getElementById("guests-list-view");
-    const guestsCardsContainer = document.getElementById(
-        "guests-cards-container",
-    );
-    const exactDataBtn = document.getElementById("exact-data-btn");
+    // Elementy HTML
+    const adminViewTitle = document.getElementById('admin-view-title');
+    const statsView = document.getElementById('stats-view');
+    const guestsListView = document.getElementById('guests-list-view');
+    const guestsCardsContainer = document.getElementById('guests-cards-container');
+    const exactDataBtn = document.getElementById('exact-data-btn');
+    const adminSearchInput = document.getElementById('admin-search-input');
+    const statFilled = document.getElementById('stat-filled');
+    const statPending = document.getElementById('stat-pending');
+    const statBoth = document.getElementById('stat-both');
+    const statChurch = document.getElementById('stat-church');
+    const statNone = document.getElementById('stat-none');
+    const statAccPeople = document.getElementById('stat-acc-people');
+    const statAccommodation = document.getElementById('stat-accommodation');
+    const statConfirmedTotal = document.getElementById('stat-confirmed-total');
 
-    const statFilled = document.getElementById("stat-filled");
-    const statPending = document.getElementById("stat-pending");
-    const statBoth = document.getElementById("stat-both");
-    const statChurch = document.getElementById("stat-church");
-    const statNone = document.getElementById("stat-none");
-    const statAccPeople = document.getElementById("stat-acc-people");
-    const statAccommodation = document.getElementById("stat-accommodation");
-    const statConfirmedTotal = document.getElementById("stat-confirmed-total");
-
+    // Cache dla gości
     let cachedGuests = [];
     let isShowingList = false;
 
+    // Pobranie danych na start
     await loadAndDisplayData();
 
     async function loadAndDisplayData() {
@@ -44,18 +46,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         calculateAndSetStats(cachedGuests);
     }
 
+    // Funkcja przeliczająca statystyki
     function calculateAndSetStats(guestsList) {
-        let filledCount = 0;
-        let pendingCount = 0;
-        let bothCount = 0;
-        let churchOnlyCount = 0;
-        let noneCount = 0;
-        let confirmedGuests = 0;
-        let confirmedAdditional = 0;
-        let accPeopleCount = 0;
+        let filledCount = 0;   
+        let pendingCount = 0;  
+        let bothCount = 0;     
+        let churchOnlyCount = 0; 
+        let noneCount = 0;     
+        let confirmedGuests = 0;     
+        let confirmedAdditional = 0; 
+        let accPeopleCount = 0; 
         const accommodationFamilies = new Set();
 
-        guestsList.forEach((g) => {
+        guestsList.forEach(g => {
             if (g.churchPresent === null && g.weddingPresent === null) {
                 pendingCount++;
             } else {
@@ -63,15 +66,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (g.churchPresent === true && g.weddingPresent === true) {
                     bothCount++;
-                } else if (
-                    g.churchPresent === true &&
-                    g.weddingPresent === false
-                ) {
+                } else if (g.churchPresent === true && g.weddingPresent === false) {
                     churchOnlyCount++;
-                } else if (
-                    g.churchPresent === false &&
-                    g.weddingPresent === false
-                ) {
+                } else if (g.churchPresent === false && g.weddingPresent === false) {
                     noneCount++;
                 }
             }
@@ -105,22 +102,61 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (statNone) statNone.textContent = noneCount;
         if (statAccPeople) statAccPeople.textContent = accPeopleCount;
         if (statAccommodation) statAccommodation.textContent = totalRoomsNeeded;
-        if (statConfirmedTotal)
-            statConfirmedTotal.textContent = totalConfirmedOnWedding;
+        if (statConfirmedTotal) statConfirmedTotal.textContent = totalConfirmedOnWedding;
+    }
+
+    // Inteligentny algorytm grupowania gości po PIN (gospodarstwach) i sortowania ich alfabetycznie
+    function groupAndSortGuestsByFamily(guestsList) {
+        const groups = {};
+
+        // 1. Grupowanie gości po ich unikalnym PIN-ie
+        guestsList.forEach(g => {
+            const key = g.pin ? g.pin : `no-pin-${g.id}`;
+            if (!groups[key]) {
+                groups[key] = [];
+            }
+            groups[key].push(g);
+        });
+
+        // 2. Sortowanie wewnętrzne każdej rodziny alfabetycznie po nazwisku, by lider zaproszenia był na początku
+        Object.keys(groups).forEach(key => {
+            groups[key].sort((a, b) => a.surname.localeCompare(b.surname, 'pl'));
+        });
+
+        // 3. Sortowanie całych grup alfabetycznie na podstawie nazwiska reprezentanta grupy (pierwszej osoby)
+        const sortedGroupsArray = Object.values(groups).sort((groupA, groupB) => {
+            const repA = groupA[0];
+            const repB = groupB[0];
+            return repA.surname.localeCompare(repB.surname, 'pl');
+        });
+
+        // 4. Spłaszczenie tablicy z powrotem do jednej, ustrukturyzowanej listy gości
+        const finalSortedGuests = [];
+        sortedGroupsArray.forEach(group => {
+            group.forEach(g => {
+                finalSortedGuests.push(g);
+            });
+        });
+
+        return finalSortedGuests;
     }
 
     if (exactDataBtn) {
-        exactDataBtn.addEventListener("click", () => {
+        exactDataBtn.addEventListener('click', () => {
             if (!isShowingList) {
-                statsView.classList.add("hidden");
-                guestsListView.classList.remove("hidden");
+                statsView.classList.add('hidden');
+                guestsListView.classList.remove('hidden');
                 exactDataBtn.textContent = "Pokaż statystyki";
                 if (adminViewTitle) adminViewTitle.textContent = "Lista gości";
-                renderGuestsList(cachedGuests);
+                
+                if (adminSearchInput) adminSearchInput.value = "";
+                
+                const processedGuests = groupAndSortGuestsByFamily(cachedGuests);
+                renderGuestsList(processedGuests);
                 isShowingList = true;
             } else {
-                guestsListView.classList.add("hidden");
-                statsView.classList.remove("hidden");
+                guestsListView.classList.add('hidden');
+                statsView.classList.remove('hidden');
                 exactDataBtn.textContent = "Dokładne dane";
                 if (adminViewTitle) adminViewTitle.textContent = "Statystyki";
                 calculateAndSetStats(cachedGuests);
@@ -129,45 +165,60 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    if (adminSearchInput) {
+        adminSearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const filteredGuests = cachedGuests.filter(g => {
+                const nameMatch = g.name && g.name.toLowerCase().includes(query);
+                const surnameMatch = g.surname && g.surname.toLowerCase().includes(query);
+                const pinMatch = g.pin && g.pin.includes(query);
+                
+                return nameMatch || surnameMatch || pinMatch;
+            });
+
+            const processedGuests = groupAndSortGuestsByFamily(filteredGuests);
+            renderGuestsList(processedGuests);
+        });
+    }
     function renderGuestsList(guestsList) {
         if (!guestsCardsContainer) return;
         guestsCardsContainer.innerHTML = "";
 
-        guestsList.forEach((g) => {
-            const card = document.createElement("div");
-            card.className = "guest-admin-card";
+        guestsList.forEach(g => {
+            const card = document.createElement('div');
+            card.className = 'guest-admin-card';
             card.dataset.id = g.id;
 
             card.innerHTML = `
-                <div class="guest-admin-name">${g.name} ${g.surname}</div>
+                <div class="guest-admin-name">
+                    ${g.name} ${g.surname}
+                    <!-- Wizualny znacznik wspólnego kodu PIN -->
+                    <span class="guest-admin-pin-badge">PIN: ${g.pin || 'brak'}</span>
+                </div>
                 <div class="guest-admin-options">
                     <label class="admin-check-label">
-                        <input type="checkbox" class="admin-check-church" ${g.churchPresent ? "checked" : ""}>
+                        <input type="checkbox" class="admin-check-church" ${g.churchPresent ? 'checked' : ''}>
                         <span class="admin-custom-check"></span>
                         <span class="admin-label-text">Ślub</span>
                     </label>
                     <label class="admin-check-label">
-                        <input type="checkbox" class="admin-check-wedding" ${g.weddingPresent ? "checked" : ""}>
+                        <input type="checkbox" class="admin-check-wedding" ${g.weddingPresent ? 'checked' : ''}>
                         <span class="admin-custom-check"></span>
                         <span class="admin-label-text">Wesele</span>
                     </label>
                     <label class="admin-check-label">
-                        <input type="checkbox" class="admin-check-accommodation" ${g.needAccommodation ? "checked" : ""}>
+                        <input type="checkbox" class="admin-check-accommodation" ${g.needAccommodation ? 'checked' : ''}>
                         <span class="admin-custom-check"></span>
                         <span class="admin-label-text">Nocleg</span>
                     </label>
                     
-                    ${
-                        g.additionalPerson
-                            ? `
+                    ${g.additionalPerson ? `
                     <label class="admin-check-label">
-                        <input type="checkbox" class="admin-check-additional" ${g.additionalPersonPresent ? "checked" : ""}>
+                        <input type="checkbox" class="admin-check-additional" ${g.additionalPersonPresent ? 'checked' : ''}>
                         <span class="admin-custom-check"></span>
                         <span class="admin-label-text">Osob. tow.</span>
                     </label>
-                    `
-                            : ""
-                    }
+                    ` : ''}
                 </div>
                 <div class="guest-admin-actions">
                     <button class="admin-save-guest-btn">Zapisz</button>
@@ -175,54 +226,37 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             `;
 
-            const saveBtn = card.querySelector(".admin-save-guest-btn");
-            saveBtn.addEventListener("click", async () => {
+            const saveBtn = card.querySelector('.admin-save-guest-btn');
+            saveBtn.addEventListener('click', async () => {
                 const id = g.id;
-                const churchPresent = card.querySelector(
-                    ".admin-check-church",
-                ).checked;
-                const weddingPresent = card.querySelector(
-                    ".admin-check-wedding",
-                ).checked;
-                const needAccommodation = card.querySelector(
-                    ".admin-check-accommodation",
-                ).checked;
-
-                const addCheck = card.querySelector(".admin-check-additional");
-                const additionalPersonPresent = addCheck
-                    ? addCheck.checked
-                    : null;
+                const churchPresent = card.querySelector('.admin-check-church').checked;
+                const weddingPresent = card.querySelector('.admin-check-wedding').checked;
+                const needAccommodation = card.querySelector('.admin-check-accommodation').checked;
+                
+                const addCheck = card.querySelector('.admin-check-additional');
+                const additionalPersonPresent = addCheck ? addCheck.checked : null;
 
                 saveBtn.disabled = true;
                 saveBtn.textContent = "Zapisywanie...";
-                const statusSpan = card.querySelector(".save-status");
+                const statusSpan = card.querySelector('.save-status');
                 statusSpan.textContent = "";
 
-                const success = await updateSingleGuestRSVP(
-                    id,
-                    churchPresent,
-                    weddingPresent,
-                    additionalPersonPresent,
-                    needAccommodation,
-                );
+                const success = await updateSingleGuestRSVP(id, churchPresent, weddingPresent, additionalPersonPresent, needAccommodation);
 
                 if (success) {
                     saveBtn.textContent = "Zapisano";
-                    saveBtn.style.backgroundColor = "var(--sage-green)";
+                    saveBtn.style.backgroundColor = "var(--sage-green)"; 
                     saveBtn.style.borderColor = "var(--sage-green)";
                     statusSpan.textContent = "✓";
                     statusSpan.style.color = "green";
 
-                    const cachedGuest = cachedGuests.find(
-                        (item) => item.id == id,
-                    );
+                    const cachedGuest = cachedGuests.find(item => item.id == id);
                     if (cachedGuest) {
                         cachedGuest.churchPresent = churchPresent;
                         cachedGuest.weddingPresent = weddingPresent;
                         cachedGuest.needAccommodation = needAccommodation;
                         if (additionalPersonPresent !== null) {
-                            cachedGuest.additionalPersonPresent =
-                                additionalPersonPresent;
+                            cachedGuest.additionalPersonPresent = additionalPersonPresent;
                         }
                     }
 
