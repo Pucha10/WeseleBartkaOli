@@ -168,12 +168,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (adminSearchInput) {
         adminSearchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
-            const filteredGuests = cachedGuests.filter(g => {
+            
+            if (query === "") {
+                const processedGuests = groupAndSortGuestsByFamily(cachedGuests);
+                renderGuestsList(processedGuests);
+                return;
+            }
+
+            const directlyMatching = cachedGuests.filter(g => {
                 const nameMatch = g.name && g.name.toLowerCase().includes(query);
                 const surnameMatch = g.surname && g.surname.toLowerCase().includes(query);
                 const pinMatch = g.pin && g.pin.includes(query);
-                
                 return nameMatch || surnameMatch || pinMatch;
+            });
+
+            const matchingPins = new Set();
+            directlyMatching.forEach(g => {
+                if (g.pin) {
+                    matchingPins.add(g.pin);
+                }
+            });
+
+            const filteredGuests = cachedGuests.filter(g => {
+                const belongsToMatchingFamily = g.pin && matchingPins.has(g.pin);
+                const matchedDirectlyWithoutPin = !g.pin && directlyMatching.some(dm => dm.id === g.id);
+                
+                return belongsToMatchingFamily || matchedDirectlyWithoutPin;
             });
 
             const processedGuests = groupAndSortGuestsByFamily(filteredGuests);
